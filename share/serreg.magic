@@ -1,0 +1,24 @@
+# es::serreg capture and registry images (https://github.com/erez-strauss/serreg)
+# Install: append to ~/.magic (file -C -m ~/.magic) or drop into /etc/magic; then `file capture.ser`.
+0	string		ESSR		es::serreg capture (FILE container)
+>4	uleshort	x		\b, format %u
+>6	uleshort	x		\b.%u
+>12	ulelong		2		\b, XXH3-64 hashes
+>42	ubyte		x		\b, abi ptr%u
+>43	ubyte		x		\b/long%u
+>44	ubyte		x		\b/wchar%u
+>8	ulelong		&0x04		\b, dictionary back-patched (1.6)
+>8	ulelong		&0x08		\b, crc
+>8	ulelong		&0x10		\b, checkpoints
+>8	ulelong		&0x20		\b, writer info
+>16	ulequad		x		\b, program hash 0x%016llx
+0	string		ESRG		es::serreg registry image (RRI)
+>4	uleshort	x		\b, format %u
+>6	uleshort	x		\b.%u
+>8	ulelong		&0x01		\b, delta
+>16	ulelong		x		\b, %u entries
+>20	ulequad		x		\b, program hash 0x%016llx
+>12	ulelong		2		\b, XXH3-64 hashes
+>34	ubyte		x		\b, abi ptr%u
+>35	ubyte		x		\b/long%u
+>36	ubyte		x		\b/wchar%u

@@ -1,0 +1,43 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {"major": 4, "minor": 0, "patch": 0},
+  "configurePresets": [
+    {"name": "base", "hidden": true, "generator": "Ninja", "binaryDir": "${sourceDir}/build/${presetName}",
+     "cacheVariables": {"CMAKE_EXPORT_COMPILE_COMMANDS": "ON", "ES_SERREG_WERROR": "ON"}},
+    {"name": "gcc16-debug",   "inherits": "base", "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug", "CMAKE_CXX_FLAGS": "-D_GLIBCXX_ASSERTIONS"}},
+    {"name": "opt-gcc16-debug", "inherits": "gcc16-debug", "cacheVariables": {"CMAKE_CXX_COMPILER": "/opt/gcc-16/bin/g++-16"}},
+    {"name": "gcc16-release", "inherits": "base", "cacheVariables": {"CMAKE_BUILD_TYPE": "Release"}},
+    {"name": "gcc16-asan-ubsan", "inherits": "base",
+     "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug",
+       "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined -fno-sanitize=null,nonnull-attribute,returns-nonnull-attribute -fno-omit-frame-pointer -D_GLIBCXX_ASSERTIONS",
+       "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined", "CMAKE_SHARED_LINKER_FLAGS": "-fsanitize=address,undefined"}},
+    {"name": "gcc16-static", "inherits": "base", "cacheVariables": {"CMAKE_BUILD_TYPE": "Release", "ES_SERREG_BUILD_SHARED": "OFF"}},
+    {"name": "gcc16-static-none", "inherits": "base", "cacheVariables": {"CMAKE_BUILD_TYPE": "Release", "ES_SERREG_BUILD_SHARED": "OFF", "ES_SERREG_IMAGE_FORMAT": "none"}},
+    {"name": "gcc16-ubsan-trap", "inherits": "base",
+     "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug",
+       "CMAKE_CXX_FLAGS": "-fsanitize=undefined -fsanitize-trap=undefined -fno-sanitize=null,nonnull-attribute,returns-nonnull-attribute,vptr -D_GLIBCXX_ASSERTIONS"}},
+    {"name": "gcc16-tsan", "inherits": "base",
+     "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug", "CMAKE_CXX_FLAGS": "-fsanitize=thread -fno-omit-frame-pointer",
+       "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=thread", "CMAKE_SHARED_LINKER_FLAGS": "-fsanitize=thread", "CMAKE_MODULE_LINKER_FLAGS": "-fsanitize=thread"}},
+    {"name": "clang-p2996", "inherits": "base", "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug", "CMAKE_CXX_FLAGS": "-stdlib=libc++"}}
+  ],
+  "buildPresets": [
+    {"name": "gcc16-debug", "configurePreset": "gcc16-debug"},
+    {"name": "gcc16-release", "configurePreset": "gcc16-release"},
+    {"name": "gcc16-asan-ubsan", "configurePreset": "gcc16-asan-ubsan"},
+    {"name": "gcc16-static", "configurePreset": "gcc16-static"},
+    {"name": "gcc16-static-none", "configurePreset": "gcc16-static-none"},
+    {"name": "gcc16-ubsan-trap", "configurePreset": "gcc16-ubsan-trap"},
+    {"name": "gcc16-tsan", "configurePreset": "gcc16-tsan"},
+    {"name": "clang-p2996", "configurePreset": "clang-p2996"}
+  ],
+  "testPresets": [
+    {"name": "gcc16-debug", "configurePreset": "gcc16-debug", "output": {"outputOnFailure": true}},
+    {"name": "gcc16-release", "configurePreset": "gcc16-release", "output": {"outputOnFailure": true}},
+    {"name": "gcc16-asan-ubsan", "configurePreset": "gcc16-asan-ubsan", "output": {"outputOnFailure": true}},
+    {"name": "gcc16-static", "configurePreset": "gcc16-static", "output": {"outputOnFailure": true}},
+    {"name": "gcc16-static-none", "configurePreset": "gcc16-static-none", "output": {"outputOnFailure": true}},
+    {"name": "gcc16-ubsan-trap", "configurePreset": "gcc16-ubsan-trap", "output": {"outputOnFailure": true}},
+    {"name": "gcc16-tsan", "configurePreset": "gcc16-tsan", "output": {"outputOnFailure": true}}
+  ]
+}

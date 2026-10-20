@@ -1,0 +1,358 @@
+program_hash = "0xd6bdb39e65bcecb7"
+
+[[types]]
+align = 1
+deprecated = 0
+fixed = true
+is_enum = true
+is_flat = true
+layout_hash = "0xfdccdf0b5609277b"
+name = "corpus::Side"
+schema_hash = "0x074e267cca5188e1"
+since = 0
+size = 1
+underlying = "u8"
+
+[[types.enumerators]]
+name = "buy"
+value = 1
+
+[[types.enumerators]]
+name = "sell"
+value = 2
+
+[[types]]
+align = 8
+deprecated = 0
+is_enum = false
+is_flat = true
+layout_hash = "0x99c125fd4fe8673c"
+name = "corpus::Cancel"
+schema_hash = "0x35af6843b770c519"
+since = 0
+size = 16
+
+[[types.fields]]
+align = 8
+deprecated = 0
+extent = 0
+kind = "u64"
+name = "id"
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "u32"
+name = "reason"
+offset = 8
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types]]
+align = 8
+deprecated = 0
+is_enum = false
+is_flat = true
+layout_hash = "0x0661bb3e388c01fe"
+name = "corpus::Order"
+schema_hash = "0x367f8cd8c6441dd2"
+since = 0
+size = 32
+
+[[types.fields]]
+align = 8
+deprecated = 0
+extent = 0
+kind = "u64"
+name = "id"
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 8
+deprecated = 0
+extent = 0
+kind = "i64"
+name = "px"
+offset = 8
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "u32"
+name = "qty"
+offset = 16
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 1
+deprecated = 0
+extent = 0
+kind = "enum"
+name = "side"
+offset = 20
+since = 0
+size = 1
+type_hash = "0x074e267cca5188e1"
+
+[[types.fields]]
+align = 1
+deprecated = 0
+extent = 8
+kind = "array"
+name = "sym"
+offset = 21
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 1
+deprecated = 0
+extent = 0
+kind = "char"
+name = ""
+offset = 0
+since = 0
+size = 1
+type_hash = "0x0000000000000000"
+
+[[literals]]
+id = "0x044e15bdafd294d4"
+text = "worlds"
+
+[[literals]]
+id = "0x06c86a210aa2cc44"
+text = "why"
+
+[[literals]]
+id = "0x198e4c6da0847235"
+text = "evt"
+
+[[literals]]
+id = "0x21b6f8be4e3aeb6d"
+text = "new order"
+
+[[literals]]
+id = "0x326eeda11396c7fa"
+text = "px={:.2f} qty={} side={}"
+
+[[literals]]
+id = "0xb610b10de5d48350"
+text = "hello {} {} {}"
+
+[[literals]]
+id = "0xe1c90c19f0ff66a4"
+text = "fill"
+
+[[literals]]
+id = "0xf3d0e4e70162e1f6"
+text = "limit={} on={}"
+
+[[calls]]
+hash = "0x0ef1cf0a2766bb0e"
+
+[[calls.args]]
+hash = "0xe1c90c19f0ff66a4"
+kind = "literal"
+
+[[calls.args]]
+hash = "0x5c23eefcac97a25f"
+kind = "const"
+scalar = "i32"
+value = 42
+bits = "0x000000000000002a"
+
+[[calls.args]]
+hash = "0x367f8cd8c6441dd2"
+kind = "type"
+
+[[calls.args]]
+hash = "0x074e267cca5188e1"
+kind = "const"
+value = "sell"
+bits = "0x0000000000000002"
+
+[[calls.args]]
+hash = "0xc89f07cc0c489ed1"
+kind = "const"
+scalar = "f64"
+value = -1.5
+bits = "0xbff8000000000000"
+
+[[calls]]
+hash = "0x2021494d68e23b2e"
+
+[[calls.args]]
+hash = "0x198e4c6da0847235"
+kind = "literal"
+
+[[calls.args]]
+hash = "0x367f8cd8c6441dd2"
+kind = "type"
+
+[[calls]]
+hash = "0x3634612c80d4caea"
+
+[[calls.args]]
+hash = "0x074e267cca5188e1"
+kind = "type"
+
+[[calls]]
+hash = "0x9557b837cf09db95"
+form = "println"
+
+[[calls.args]]
+hash = "0xf3d0e4e70162e1f6"
+kind = "literal"
+
+[[calls.args]]
+hash = "0x7fbe4709487c9094"
+kind = "const"
+scalar = "i64"
+value = 5000000000
+bits = "0x000000012a05f200"
+
+[[calls.args]]
+hash = "0x0a20cc1c3388e954"
+kind = "const"
+scalar = "bool"
+value = true
+bits = "0x0000000000000001"
+
+[[calls]]
+hash = "0x988a6bd1b7830cb4"
+
+[[calls.args]]
+hash = "0x35af6843b770c519"
+kind = "type"
+
+[[calls.args]]
+hash = "0x06c86a210aa2cc44"
+kind = "literal"
+
+[[calls]]
+hash = "0x99435134c0d0d957"
+
+[[calls.args]]
+hash = "0xd8ad194648e774f1"
+kind = "string"
+
+[[calls.args]]
+hash = "0x5c23eefcac97a25f"
+kind = "scalar"
+scalar = "i32"
+
+[[calls.args]]
+hash = "0xc89f07cc0c489ed1"
+kind = "scalar"
+scalar = "f64"
+
+[[calls.args]]
+hash = "0x198e4c6da0847235"
+kind = "literal"
+
+[[calls]]
+hash = "0xbcf8e25bde66fdb2"
+
+[[calls.args]]
+hash = "0x21b6f8be4e3aeb6d"
+kind = "literal"
+
+[[calls.args]]
+hash = "0x367f8cd8c6441dd2"
+kind = "type"
+
+[[calls]]
+hash = "0xe567146fd5018b5b"
+form = "println"
+
+[[calls.args]]
+hash = "0x326eeda11396c7fa"
+kind = "literal"
+
+[[calls.args]]
+hash = "0xc89f07cc0c489ed1"
+kind = "scalar"
+scalar = "f64"
+
+[[calls.args]]
+hash = "0x5f64bb4a42cff6a4"
+kind = "scalar"
+scalar = "u32"
+
+[[calls.args]]
+hash = "0x074e267cca5188e1"
+kind = "type"
+
+[[calls]]
+hash = "0xe97f49911b00565e"
+form = "print"
+
+[[calls.args]]
+hash = "0xb610b10de5d48350"
+kind = "literal"
+
+[[calls.args]]
+hash = "0xd8ad194648e774f1"
+kind = "string"
+
+[[calls.args]]
+hash = "0x5c23eefcac97a25f"
+kind = "scalar"
+scalar = "i32"
+
+[[calls.args]]
+hash = "0x044e15bdafd294d4"
+kind = "literal"
+{"frame":1,"record":0,"type":"literal","value":{"lit":"new order","id":"0x21b6f8be4e3aeb6d"}}
+{"frame":1,"record":1,"type":"corpus::Order","value":{"id":"42","px":"1050000","qty":100,"side":{"name":"buy","value":1},"sym":"AAPL\u0000\u0000\u0000\u0000"}}
+{"frame":2,"record":0,"type":"literal","value":{"lit":"new order","id":"0x21b6f8be4e3aeb6d"}}
+{"frame":2,"record":1,"type":"corpus::Order","value":{"id":"43","px":"-1","qty":0,"side":{"name":"sell","value":2},"sym":"MSFT\u0000\u0000\u0000\u0000"}}
+{"frame":3,"record":0,"type":"corpus::Cancel","value":{"id":"42","reason":7}}
+{"frame":3,"record":1,"type":"literal","value":{"lit":"why","id":"0x06c86a210aa2cc44"}}
+{"frame":4,"record":0,"type":"corpus::Side","value":{"name":"buy","value":1}}
+{"frame":5,"record":0,"type":"literal","value":{"lit":"evt","id":"0x198e4c6da0847235"}}
+{"frame":5,"record":1,"type":"corpus::Order","value":{"id":"42","px":"1050000","qty":100,"side":{"name":"buy","value":1},"sym":"AAPL\u0000\u0000\u0000\u0000"}}
+{"frame":6,"record":0,"type":"literal","value":{"lit":"hello {} {} {}","id":"0xb610b10de5d48350"}}
+{"frame":6,"record":1,"type":"string","value":"new"}
+{"frame":6,"record":2,"type":"i32","value":100}
+{"frame":6,"record":3,"type":"literal","value":{"lit":"worlds","id":"0x044e15bdafd294d4"}}
+{"frame":6,"message":"hello new 100 worlds"}
+{"frame":7,"record":0,"type":"literal","value":{"lit":"px={:.2f} qty={} side={}","id":"0x326eeda11396c7fa"}}
+{"frame":7,"record":1,"type":"f64","value":2.5}
+{"frame":7,"record":2,"type":"u32","value":7}
+{"frame":7,"record":3,"type":"corpus::Side","value":{"name":"sell","value":2}}
+{"frame":7,"message":"px=2.50 qty=7 side=sell\n"}
+{"frame":8,"record":0,"type":"string","value":"abc"}
+{"frame":8,"record":1,"type":"i32","value":42}
+{"frame":8,"record":2,"type":"f64","value":1.5}
+{"frame":8,"record":3,"type":"literal","value":{"lit":"evt","id":"0x198e4c6da0847235"}}
+{"frame":9,"record":0,"type":"literal","value":{"lit":"fill","id":"0xe1c90c19f0ff66a4"}}
+{"frame":9,"record":1,"type":"i32","value":42}
+{"frame":9,"record":2,"type":"corpus::Order","value":{"id":"42","px":"1050000","qty":100,"side":{"name":"buy","value":1},"sym":"AAPL\u0000\u0000\u0000\u0000"}}
+{"frame":9,"record":3,"type":"corpus::Side","value":{"name":"sell","value":2}}
+{"frame":9,"record":4,"type":"f64","value":-1.5}
+{"frame":10,"record":0,"type":"literal","value":{"lit":"fill","id":"0xe1c90c19f0ff66a4"}}
+{"frame":10,"record":1,"type":"i32","value":42}
+{"frame":10,"record":2,"type":"corpus::Order","value":{"id":"42","px":"1050000","qty":100,"side":{"name":"buy","value":1},"sym":"AAPL\u0000\u0000\u0000\u0000"}}
+{"frame":10,"record":3,"type":"corpus::Side","value":{"name":"sell","value":2}}
+{"frame":10,"record":4,"type":"f64","value":-1.5}
+{"frame":11,"record":0,"type":"literal","value":{"lit":"limit={} on={}","id":"0xf3d0e4e70162e1f6"}}
+{"frame":11,"record":1,"type":"i64","value":"5000000000"}
+{"frame":11,"record":2,"type":"bool","value":true}
+{"frame":11,"message":"limit=5000000000 on=true\n"}

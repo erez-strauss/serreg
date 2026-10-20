@@ -1,0 +1,10 @@
+# srdump config
+verify = true
+json = false
+format = "text"
+frames = "0..10"
+type = "t::Pixel"
+dict = ["a.rri", "b.rri"]
+elf = "app"
+[section]
+hex = true

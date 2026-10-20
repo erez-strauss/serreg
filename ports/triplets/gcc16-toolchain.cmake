@@ -1,0 +1,10 @@
+# Chain-loaded by x64-linux-gcc16.cmake. Adjust the prefix to your GCC 16 installation.
+if(NOT DEFINED ENV{ES_SERREG_GCC16_PREFIX})
+  set(_p /opt/gcc-16)
+else()
+  set(_p $ENV{ES_SERREG_GCC16_PREFIX})
+endif()
+set(CMAKE_C_COMPILER   ${_p}/bin/gcc-16 CACHE FILEPATH "")
+set(CMAKE_CXX_COMPILER ${_p}/bin/g++-16 CACHE FILEPATH "")
+set(CMAKE_EXE_LINKER_FLAGS_INIT    "-Wl,-rpath,${_p}/lib64")
+set(CMAKE_SHARED_LINKER_FLAGS_INIT "-Wl,-rpath,${_p}/lib64")

@@ -1,0 +1,11 @@
+# .gitattributes (2.1.11). The fixtures are compared byte for byte by ctest
+# (golden_fixture_*_byte_exact, the RRI canary, the fuzz seeds), so no checkout may convert them.
+* text=auto eol=lf
+*.ser binary
+*.rri binary
+*.bin binary
+*.o binary
+tests/fixtures/** -text -diff
+*.sh text eol=lf
+*.py text eol=lf
+scripts/pre-commit text eol=lf

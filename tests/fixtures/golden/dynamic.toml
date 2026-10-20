@@ -1,0 +1,699 @@
+program_hash = "0x893d717964c2b1ef"
+
+[[types]]
+align = 4
+deprecated = 0
+is_enum = false
+is_flat = false
+layout_hash = "0x03d4f3aff8e167eb"
+name = "std::vector<i32>"
+schema_hash = "0x02c87ef3a015eb45"
+since = 0
+size = 8
+transparent = true
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "vector"
+name = ""
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "i32"
+name = ""
+offset = 0
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types]]
+align = 1
+deprecated = 0
+fixed = true
+is_enum = true
+is_flat = true
+layout_hash = "0xfdccdf0b5609277b"
+name = "corpus::Side"
+schema_hash = "0x074e267cca5188e1"
+since = 0
+size = 1
+underlying = "u8"
+
+[[types.enumerators]]
+name = "buy"
+value = 1
+
+[[types.enumerators]]
+name = "sell"
+value = 2
+
+[[types]]
+align = 4
+deprecated = 0
+is_enum = false
+is_flat = false
+layout_hash = "0x5e48ff513e467a38"
+name = "corpus::DynMap"
+schema_hash = "0x1aa730519093de87"
+since = 0
+size = 36
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "u32"
+name = "id"
+offset = 0
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 12
+kind = "map"
+name = "by_name"
+offset = 4
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "string"
+name = ""
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "i32"
+name = ""
+offset = 8
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 2
+kind = "set"
+name = "ids"
+offset = 12
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 2
+deprecated = 0
+extent = 0
+kind = "u16"
+name = ""
+offset = 0
+since = 0
+size = 2
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 12
+kind = "map"
+name = "names"
+offset = 20
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "i32"
+name = ""
+offset = 0
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "string"
+name = ""
+offset = 4
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 24
+kind = "map"
+name = "msgs"
+offset = 28
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 1
+deprecated = 0
+extent = 0
+kind = "u8"
+name = ""
+offset = 0
+since = 0
+size = 1
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "struct"
+name = ""
+offset = 4
+since = 0
+size = 20
+type_hash = "0xb487de0c417a37e8"
+
+[[types]]
+align = 8
+deprecated = 0
+is_enum = false
+is_flat = true
+layout_hash = "0x0661bb3e388c01fe"
+name = "corpus::Order"
+schema_hash = "0x367f8cd8c6441dd2"
+since = 0
+size = 32
+
+[[types.fields]]
+align = 8
+deprecated = 0
+extent = 0
+kind = "u64"
+name = "id"
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 8
+deprecated = 0
+extent = 0
+kind = "i64"
+name = "px"
+offset = 8
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "u32"
+name = "qty"
+offset = 16
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 1
+deprecated = 0
+extent = 0
+kind = "enum"
+name = "side"
+offset = 20
+since = 0
+size = 1
+type_hash = "0x074e267cca5188e1"
+
+[[types.fields]]
+align = 1
+deprecated = 0
+extent = 8
+kind = "array"
+name = "sym"
+offset = 21
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 1
+deprecated = 0
+extent = 0
+kind = "char"
+name = ""
+offset = 0
+since = 0
+size = 1
+type_hash = "0x0000000000000000"
+
+[[types]]
+align = 8
+deprecated = 0
+is_enum = false
+is_flat = false
+layout_hash = "0xb36da7cca7cdd27a"
+name = "corpus::DynBase"
+schema_hash = "0x6d367348e3549641"
+since = 0
+size = 40
+
+[[types.fields]]
+align = 8
+deprecated = 0
+extent = 0
+kind = "struct"
+name = "<base:corpus::Order>"
+offset = 0
+since = 0
+size = 32
+type_hash = "0x367f8cd8c6441dd2"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "string"
+name = "note"
+offset = 32
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types]]
+align = 4
+deprecated = 0
+is_enum = false
+is_flat = false
+layout_hash = "0xab9b51e9c98b131d"
+name = "corpus::DynArr"
+schema_hash = "0x9032db9ee55d1318"
+since = 0
+size = 40
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 2
+kind = "array"
+name = "names"
+offset = 0
+since = 0
+size = 16
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "string"
+name = ""
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "vector"
+name = "tags"
+offset = 16
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "string"
+name = ""
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "optional"
+name = "side"
+offset = 24
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 1
+deprecated = 0
+extent = 0
+kind = "enum"
+name = ""
+offset = 0
+since = 0
+size = 1
+type_hash = "0x074e267cca5188e1"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 2
+kind = "variant"
+name = "maybe_msg"
+offset = 32
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 1
+deprecated = 0
+extent = 0
+kind = "struct"
+name = ""
+offset = 0
+since = 0
+size = 1
+type_hash = "0xe3f5041aaaa18c06"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "struct"
+name = ""
+offset = 0
+since = 0
+size = 20
+type_hash = "0xb487de0c417a37e8"
+
+[[types]]
+align = 4
+deprecated = 0
+is_enum = false
+is_flat = false
+layout_hash = "0x7835cb0574f155da"
+name = "corpus::DynMsg"
+schema_hash = "0xb487de0c417a37e8"
+since = 0
+size = 20
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "u32"
+name = "id"
+offset = 0
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "string"
+name = "name"
+offset = 4
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "vector"
+name = "xs"
+offset = 12
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 2
+deprecated = 0
+extent = 0
+kind = "i16"
+name = ""
+offset = 0
+since = 0
+size = 2
+type_hash = "0x0000000000000000"
+
+[[types]]
+align = 1
+deprecated = 0
+is_enum = false
+is_flat = true
+layout_hash = "0x3ba1f9a330b68a73"
+name = "std::monostate"
+schema_hash = "0xe3f5041aaaa18c06"
+since = 0
+size = 1
+
+[[types]]
+align = 4
+deprecated = 0
+is_enum = false
+is_flat = false
+layout_hash = "0x81a9968392688e75"
+name = "corpus::DynNested"
+schema_hash = "0xf4d2426d5a5d76df"
+since = 0
+size = 24
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "vector"
+name = "msgs"
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "struct"
+name = ""
+offset = 0
+since = 0
+size = 20
+type_hash = "0xb487de0c417a37e8"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "optional"
+name = "maybe"
+offset = 8
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 8
+deprecated = 0
+extent = 0
+kind = "struct"
+name = ""
+offset = 0
+since = 0
+size = 32
+type_hash = "0x367f8cd8c6441dd2"
+
+[[types.fields]]
+align = 4
+deprecated = 0
+extent = 3
+kind = "variant"
+name = "v"
+offset = 16
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "i32"
+name = ""
+offset = 0
+since = 0
+size = 4
+type_hash = "0x0000000000000000"
+
+[[types.fields.elem]]
+align = 8
+deprecated = 0
+extent = 0
+kind = "struct"
+name = ""
+offset = 0
+since = 0
+size = 32
+type_hash = "0x367f8cd8c6441dd2"
+
+[[types.fields.elem]]
+align = 4
+deprecated = 0
+extent = 0
+kind = "string"
+name = ""
+offset = 0
+since = 0
+size = 8
+type_hash = "0x0000000000000000"
+
+[[literals]]
+id = "0x1884f6edbfe89b6e"
+text = "msg={} note={}"
+
+[[literals]]
+id = "0x68dc79c312020102"
+text = "map"
+
+[[literals]]
+id = "0xb6ed62f53c446e40"
+text = "ids={} map={}"
+
+[[literals]]
+id = "0xfa579a03eefd9495"
+text = "ids"
+
+[[calls]]
+hash = "0x07f130f7f874007a"
+
+[[calls.args]]
+hash = "0x6d367348e3549641"
+kind = "type"
+
+[[calls]]
+hash = "0x594f3763afbcef17"
+
+[[calls.args]]
+hash = "0xf4d2426d5a5d76df"
+kind = "type"
+
+[[calls.args]]
+hash = "0x9032db9ee55d1318"
+kind = "type"
+
+[[calls]]
+hash = "0x756ab14e2ac9db8e"
+
+[[calls.args]]
+hash = "0xb487de0c417a37e8"
+kind = "type"
+
+[[calls]]
+hash = "0x7bc19f076918cb8d"
+form = "println"
+
+[[calls.args]]
+hash = "0xb6ed62f53c446e40"
+kind = "literal"
+
+[[calls.args]]
+hash = "0x02c87ef3a015eb45"
+kind = "type"
+
+[[calls.args]]
+hash = "0x1aa730519093de87"
+kind = "type"
+
+[[calls]]
+hash = "0x9ed3aef1a696894d"
+
+[[calls.args]]
+hash = "0xfa579a03eefd9495"
+kind = "literal"
+
+[[calls.args]]
+hash = "0x02c87ef3a015eb45"
+kind = "type"
+
+[[calls]]
+hash = "0xcd9f5445da365471"
+
+[[calls.args]]
+hash = "0x68dc79c312020102"
+kind = "literal"
+
+[[calls.args]]
+hash = "0x1aa730519093de87"
+kind = "type"
+
+[[calls]]
+hash = "0xe3567a6dde0d2d3f"
+form = "println"
+
+[[calls.args]]
+hash = "0x1884f6edbfe89b6e"
+kind = "literal"
+
+[[calls.args]]
+hash = "0xb487de0c417a37e8"
+kind = "type"
+
+[[calls.args]]
+hash = "0xd8ad194648e774f1"
+kind = "string"
+{"frame":1,"record":0,"type":"corpus::DynMsg","value":{"id":7,"name":"ab","xs":[1,-2,3]}}
+{"frame":2,"record":0,"type":"corpus::DynNested","value":{"msgs":[{"id":7,"name":"ab","xs":[1,-2,3]},{"id":8,"name":"","xs":[]}],"maybe":{"id":"42","px":"1050000","qty":100,"side":{"name":"buy","value":1},"sym":"AAPL\u0000\u0000\u0000\u0000"},"v":{"alt":2,"type":"string","value":"var"}}}
+{"frame":2,"record":1,"type":"corpus::DynArr","value":{"names":["n0","n1"],"tags":["x","yy"],"side":null,"maybe_msg":{"alt":1,"type":"corpus::DynMsg","value":{"id":7,"name":"ab","xs":[1,-2,3]}}}}
+{"frame":3,"record":0,"type":"corpus::DynBase","value":{"<base:corpus::Order>":{"id":"42","px":"1050000","qty":100,"side":{"name":"buy","value":1},"sym":"AAPL\u0000\u0000\u0000\u0000"},"note":"note"}}
+{"frame":4,"record":0,"type":"literal","value":{"lit":"msg={} note={}","id":"0x1884f6edbfe89b6e"}}
+{"frame":4,"record":1,"type":"corpus::DynMsg","value":{"id":7,"name":"ab","xs":[1,-2,3]}}
+{"frame":4,"record":2,"type":"string","value":"text"}
+{"frame":4,"message":"msg=corpus::DynMsg{id: 7, name: \"ab\", xs: [1, -2, 3]} note=text\n"}
+{"frame":5,"record":0,"type":"literal","value":{"lit":"map","id":"0x68dc79c312020102"}}
+{"frame":5,"record":1,"type":"corpus::DynMap","value":{"id":9,"by_name":[{"key":"a","value":1},{"key":"b","value":2},{"key":"c","value":3}],"ids":[10,20,30],"names":[{"key":-1,"value":"minus one"},{"key":4,"value":"four"},{"key":5,"value":"five"}],"msgs":[{"key":1,"value":{"id":1,"name":"one","xs":[1,1]}},{"key":2,"value":{"id":2,"name":"two","xs":[2]}}]}}
+{"frame":6,"record":0,"type":"literal","value":{"lit":"ids","id":"0xfa579a03eefd9495"}}
+{"frame":6,"record":1,"type":"std::vector<i32>","value":[3,1,2]}
+{"frame":7,"record":0,"type":"literal","value":{"lit":"ids","id":"0xfa579a03eefd9495"}}
+{"frame":7,"record":1,"type":"std::vector<i32>","value":[]}
+{"frame":8,"record":0,"type":"literal","value":{"lit":"ids","id":"0xfa579a03eefd9495"}}
+{"frame":8,"record":1,"type":"std::vector<i32>","value":[3,1,2]}
+{"frame":9,"record":0,"type":"literal","value":{"lit":"ids={} map={}","id":"0xb6ed62f53c446e40"}}
+{"frame":9,"record":1,"type":"std::vector<i32>","value":[3,1,2]}
+{"frame":9,"record":2,"type":"corpus::DynMap","value":{"id":9,"by_name":[{"key":"a","value":1},{"key":"b","value":2},{"key":"c","value":3}],"ids":[10,20,30],"names":[{"key":-1,"value":"minus one"},{"key":4,"value":"four"},{"key":5,"value":"five"}],"msgs":[{"key":1,"value":{"id":1,"name":"one","xs":[1,1]}},{"key":2,"value":{"id":2,"name":"two","xs":[2]}}]}}
+{"frame":9,"message":"ids=[3, 1, 2] map=corpus::DynMap{id: 9, by_name: {\"a\": 1, \"b\": 2, \"c\": 3}, ids: {10, 20, 30}, names: {-1: \"minus one\", 4: \"four\", 5: \"five\"}, msgs: {1: corpus::DynMsg{id: 1, name: \"one\", xs: [1, 1]}, 2: corpus::DynMsg{id: 2, name: \"two\", xs: [2]}}}\n"}

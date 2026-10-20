@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "serreg"
+version = "2.2.6"
+description = "Stand-alone pure-Python reader for es::serreg binary captures (wire format 1.6 and 1.7)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: System :: Logging",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.scripts]
+serreg-dump = "serreg.__main__:main"
+
+[tool.setuptools]
+packages = ["serreg"]

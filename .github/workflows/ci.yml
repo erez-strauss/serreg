@@ -1,0 +1,88 @@
+# CI for es::serreg (cc N0). The gcc:16 image carries GCC 16.x with -freflection; the matrix runs the full ctest
+# suite per preset and uploads the golden-print output so a deliberate refreeze is reviewable in a diff.
+name: ci
+on: [push, pull_request]
+jobs:
+  gcc16:
+    runs-on: ubuntu-24.04
+    container: gcc:16
+    strategy:
+      fail-fast: false
+      matrix:
+        preset: [gcc16-debug, gcc16-release, gcc16-static, gcc16-static-none, gcc16-asan-ubsan]
+    steps:
+      - uses: actions/checkout@v4
+      - name: tools
+        run: apt-get update && apt-get install -y --no-install-recommends ninja-build git python3-pip && pip install --break-system-packages 'cmake>=4.0,<5' && cmake --version
+      - name: configure
+        run: CXX=g++ cmake --preset ${{ matrix.preset }}
+      - name: build
+        run: cmake --build --preset ${{ matrix.preset }} -j
+      - name: test
+        run: ctest --preset ${{ matrix.preset }} --output-on-failure -j2 -LE bench
+        env:
+          ASAN_OPTIONS: detect_leaks=1:abort_on_error=1
+          UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+      - name: golden print
+        if: matrix.preset == 'gcc16-debug'
+        run: ./build/${{ matrix.preset }}/tests/unit/serreg_tests "[golden-print]" > golden-print.txt || true
+      - uses: actions/upload-artifact@v4
+        if: matrix.preset == 'gcc16-debug'
+        with: { name: golden-print, path: golden-print.txt }
+  book:
+    # 2.1.0: the book stays in sync with the sources (pages, citations, removed names, quoted test names)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check-book.py
+  full-sandbox:
+    # 2.1.7: the verification protocol as one command, minus what a hosted runner cannot do quickly; the logs are the
+    # artifact a reviewer reads (docs/test-and-log-protocol.md). ubsan-trap needs no sanitizer runtime.
+    runs-on: ubuntu-24.04
+    container: gcc:16
+    steps:
+      - uses: actions/checkout@v4
+      - name: tools
+        run: apt-get update && apt-get install -y --no-install-recommends ninja-build git python3 python3-pip file pkg-config lua5.2 lua5.4 && pip install --break-system-packages 'cmake>=4.0,<5' clang-format==22.1.8 && cmake --version
+      - name: run-all-tests (debug, ubsan-trap, 20000 fuzz iterations each)
+        run: CXX=g++ scripts/run-all-tests.sh --presets gcc16-debug,gcc16-ubsan-trap --fuzz-iters 20000 --no-install
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: serreg-tests-logs, path: 'logs/serreg-tests-*.tar.gz' }
+  tsan:
+    # 2.1.7: the concurrency subset under TSan (the reference-box stage of run-all-tests.sh)
+    runs-on: ubuntu-24.04
+    container: gcc:16
+    steps:
+      - uses: actions/checkout@v4
+      - name: tools
+        run: apt-get update && apt-get install -y --no-install-recommends ninja-build git python3 python3-pip && pip install --break-system-packages 'cmake>=4.0,<5' && cmake --version
+      - name: tsan
+        run: CXX=g++ scripts/run-all-tests.sh --presets gcc16-tsan --tsan-repeat 10 --no-install --fuzz-iters 1000
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: serreg-tsan-logs, path: 'logs/serreg-tests-*.tar.gz' }
+  format:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: pipx install clang-format==22.1.8   # the reference formatter (2.1.9); Ubuntu 24.04 ships 18; pip is PEP 668-locked
+      - name: clang-format check
+        run: |
+          find include src tools tests examples -name '*.cpp' -o -name '*.hpp' | xargs clang-format --style=file --dry-run --Werror
+  clang-p2996:
+    # Cross-compiler golden check (FR-H4). Pin an image that ships Bloomberg's clang-p2996 and drop continue-on-error.
+    # 2.1.7: hashes.cpp has the standalone mode this job needs (ES_SERREG_GOLDEN_STANDALONE; ctest
+    # golden_hashes_standalone_compiles keeps it compiling with GCC). The job still fails until the runner has a
+    # clang-p2996; docs/ce-links.md is the manual alternative.
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: compile the golden file with clang-p2996 (needs a p2996 toolchain on PATH)
+        run: |
+          if command -v clang++-p2996 >/dev/null; then
+            clang++-p2996 -std=c++26 -freflection-latest -stdlib=libc++ -fsyntax-only -Iinclude -Itests/golden -DES_SERREG_GOLDEN_STANDALONE tests/golden/hashes.cpp
+          else
+            echo "clang-p2996 not available on this runner"; exit 1
+          fi

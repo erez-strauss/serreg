@@ -1,0 +1,25 @@
+#!/bin/sh
+# Git pre-commit hook: refuse commits whose staged C++ files are not clang-format clean.
+# Install with: scripts/install-hooks.sh   (or: ln -sf ../../scripts/pre-commit .git/hooks/pre-commit)
+# POSIX sh (2.1.12, review B-01f: the hook used bash process substitution under #!/bin/sh, a syntax error where
+# /bin/sh is dash). The reference formatter is clang-format 22 (2.1.9); other versions may format differently.
+CF=${CLANG_FORMAT:-$(command -v clang-format-22 || command -v clang-format)}
+if [ -z "$CF" ]; then
+  echo "pre-commit: clang-format not found (set CLANG_FORMAT=/path/to/clang-format); refusing to commit unformatted code" >&2
+  exit 1
+fi
+case "$("$CF" --version 2>/dev/null)" in
+  *"version 22."*) ;;
+  *) echo "pre-commit: warning: $CF is not clang-format 22 (the reference); its output may differ" >&2 ;;
+esac
+status=0
+tmp=$(mktemp) || exit 1
+trap 'rm -f "$tmp"' EXIT
+for f in $(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(cpp|hpp|h|cc|cxx|ipp)$'); do
+  git show ":$f" > "$tmp" || continue
+  if ! "$CF" --style=file --assume-filename="$f" < "$tmp" | cmp -s - "$tmp"; then
+    echo "pre-commit: $f is not clang-format clean (run: clang-format -i $f)" >&2
+    status=1
+  fi
+done
+exit $status

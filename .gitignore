@@ -1,0 +1,11 @@
+build*/
+cmake-*/
+.cache*/
+.ccache*/
+Testing/
+compile_commands.json
+*.ser
+*.rri
+!tests/fixtures/**
+logs/
+__pycache__/

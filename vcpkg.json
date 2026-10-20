@@ -1,0 +1,14 @@
+{
+  "name": "serreg",
+  "version": "2.2.6",
+  "description": "C++26 reflection-driven binary serialization with a load-time type registry (es::serreg)",
+  "homepage": "https://github.com/erez-strauss/serreg",
+  "license": "MIT",
+  "supports": "linux & x64",
+  "dependencies": [],
+  "features": {
+    "tools": { "description": "Build and install the srdump tool" },
+    "tests": { "description": "Build tests (Catch2 v3)", "dependencies": ["catch2"] }
+  },
+  "default-features": ["tools"]
+}

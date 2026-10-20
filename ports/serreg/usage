@@ -1,0 +1,9 @@
+serreg provides three CMake targets in one package (2.1.13):
+
+  find_package(serreg CONFIG REQUIRED)                 # or: COMPONENTS serreg tools ipc
+  target_link_libraries(main PRIVATE es::serreg)       # the runtime: registry, serialize, readers
+  target_link_libraries(main PRIVATE es::serreg_tools) # srdump's command line, Wireshark generator, diff
+  target_link_libraries(main PRIVATE es::ipc)          # header-only shared-memory rings (C++23)
+
+es::serreg needs GCC 16+ (-std=c++26 -freflection); use the x64-linux-gcc16 triplet or set
+VCPKG_CXX_COMPILER / CMAKE_CXX_COMPILER to g++-16 in your own triplet. es::ipc alone needs only C++23.

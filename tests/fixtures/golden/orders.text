@@ -1,0 +1,106 @@
+dictionary  program_hash 0xd6bdb39e65bcecb7  (3 types, 8 literals, 9 calls)
+enum corpus::Side : u8  schema 0x074e267cca5188e1  layout 0xfdccdf0b5609277b  size 1  align 1
+  buy = 1
+  sell = 2
+struct corpus::Cancel  schema 0x35af6843b770c519  layout 0x99c125fd4fe8673c  size 16  align 8  flat
+  id: u64 @0 [8,8]
+  reason: u32 @8 [4,4]
+  /* tail: 4 bytes padding */
+  /* size 16: payload 12 (75.0%), padding 4 (25.0%) = holes 0/0 B, tail 4 B */
+struct corpus::Order  schema 0x367f8cd8c6441dd2  layout 0x0661bb3e388c01fe  size 32  align 8  flat
+  id: u64 @0 [8,8]
+  px: i64 @8 [8,8]
+  qty: u32 @16 [4,4]
+  side: enum<corpus::Side> @20 [1,1]
+  sym: array<char,8> @21 [8,1]
+  /* tail: 3 bytes padding */
+  /* size 32: payload 29 (90.6%), padding 3 (9.4%) = holes 0/0 B, tail 3 B */
+layout      2 flat types, 48 bytes: payload 41 (85.4%), padding 7 (14.6%)
+literal 0x044e15bdafd294d4 "worlds"
+literal 0x06c86a210aa2cc44 "why"
+literal 0x198e4c6da0847235 "evt"
+literal 0x21b6f8be4e3aeb6d "new order"
+literal 0x326eeda11396c7fa "px={:.2f} qty={} side={}"
+literal 0xb610b10de5d48350 "hello {} {} {}"
+literal 0xe1c90c19f0ff66a4 "fill"
+literal 0xf3d0e4e70162e1f6 "limit={} on={}"
+call 0x0ef1cf0a2766bb0e  (lit, const i32=0x000000000000002a, corpus::Order, const corpus::Side=0x0000000000000002, const f64=0xbff8000000000000)
+call 0x2021494d68e23b2e  (lit, corpus::Order)
+call 0x3634612c80d4caea  (corpus::Side)
+println 0x9557b837cf09db95  (lit, const i64=0x000000012a05f200, const bool=0x0000000000000001)
+call 0x988a6bd1b7830cb4  (corpus::Cancel, lit)
+call 0x99435134c0d0d957  (string, i32, f64, lit)
+call 0xbcf8e25bde66fdb2  (lit, corpus::Order)
+println 0xe567146fd5018b5b  (lit, f64, u32, corpus::Side)
+print 0xe97f49911b00565e  (lit, string, i32, lit)
+
+frame 1  call 0xbcf8e25bde66fdb2  (2 records)
+  [0] "new order"
+  [1] corpus::Order {
+        id: 42
+        px: 1050000
+        qty: 100
+        side: corpus::Side::buy (1)
+        sym: "AAPL\0\0\0\0"
+      }
+frame 2  call 0xbcf8e25bde66fdb2  (2 records)
+  [0] "new order"
+  [1] corpus::Order {
+        id: 43
+        px: -1
+        qty: 0
+        side: corpus::Side::sell (2)
+        sym: "MSFT\0\0\0\0"
+      }
+frame 3  call 0x988a6bd1b7830cb4  (2 records)
+  [0] corpus::Cancel {
+        id: 42
+        reason: 7
+      }
+  [1] "why"
+frame 4  call 0x3634612c80d4caea  (1 records)
+  [0] corpus::Side::buy (1)
+frame 5  call 0x2021494d68e23b2e  (2 records, full)
+  [0] "evt"
+  [1] corpus::Order {
+        id: 42
+        px: 1050000
+        qty: 100
+        side: corpus::Side::buy (1)
+        sym: "AAPL\0\0\0\0"
+      }
+frame 6  print 0xe97f49911b00565e  (4 records)
+  print: hello new 100 worlds
+frame 7  println 0xe567146fd5018b5b  (4 records)
+  print: px=2.50 qty=7 side=sell
+frame 8  call 0x99435134c0d0d957  (4 records)
+  [0] string = "abc"
+  [1] i32 = 42
+  [2] f64 = 1.5
+  [3] "evt"
+frame 9  call 0x0ef1cf0a2766bb0e  (5 records)
+  [0] "fill"
+  [1] i32 = 42
+  [2] corpus::Order {
+        id: 42
+        px: 1050000
+        qty: 100
+        side: corpus::Side::buy (1)
+        sym: "AAPL\0\0\0\0"
+      }
+  [3] corpus::Side::sell (2)
+  [4] f64 = -1.5
+frame 10  call 0x0ef1cf0a2766bb0e  (5 records, full)
+  [0] "fill"
+  [1] i32 = 42
+  [2] corpus::Order {
+        id: 42
+        px: 1050000
+        qty: 100
+        side: corpus::Side::buy (1)
+        sym: "AAPL\0\0\0\0"
+      }
+  [3] corpus::Side::sell (2)
+  [4] f64 = -1.5
+frame 11  println 0x9557b837cf09db95  (3 records)
+  print: limit=5000000000 on=true

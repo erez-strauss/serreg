@@ -1,0 +1,115 @@
+dictionary  program_hash 0x893d717964c2b1ef  (9 types, 4 literals, 7 calls)
+struct std::vector<i32>  schema 0x02c87ef3a015eb45  layout 0x03d4f3aff8e167eb  size 8  align 4  dynamic  transparent
+  : vector<i32> @0 [8,4]
+enum corpus::Side : u8  schema 0x074e267cca5188e1  layout 0xfdccdf0b5609277b  size 1  align 1
+  buy = 1
+  sell = 2
+struct corpus::DynMap  schema 0x1aa730519093de87  layout 0x5e48ff513e467a38  size 36  align 4  dynamic
+  id: u32 @0 [4,4]
+  by_name: map<string,i32> @4 [8,4]
+  ids: set<u16> @12 [8,4]
+  names: map<i32,string> @20 [8,4]
+  msgs: map<u8,struct<corpus::DynMsg>> @28 [8,4]
+struct corpus::Order  schema 0x367f8cd8c6441dd2  layout 0x0661bb3e388c01fe  size 32  align 8  flat
+  id: u64 @0 [8,8]
+  px: i64 @8 [8,8]
+  qty: u32 @16 [4,4]
+  side: enum<corpus::Side> @20 [1,1]
+  sym: array<char,8> @21 [8,1]
+  /* tail: 3 bytes padding */
+  /* size 32: payload 29 (90.6%), padding 3 (9.4%) = holes 0/0 B, tail 3 B */
+struct corpus::DynBase  schema 0x6d367348e3549641  layout 0xb36da7cca7cdd27a  size 40  align 8  dynamic
+  <base:corpus::Order>: struct<corpus::Order> @0 [32,8]
+  note: string @32 [8,4]
+struct corpus::DynArr  schema 0x9032db9ee55d1318  layout 0xab9b51e9c98b131d  size 40  align 4  dynamic
+  names: array<string,2> @0 [16,4]
+  tags: vector<string> @16 [8,4]
+  side: optional<enum<corpus::Side>> @24 [8,4]
+  maybe_msg: variant<struct<std::monostate>|struct<corpus::DynMsg>> @32 [8,4]
+struct corpus::DynMsg  schema 0xb487de0c417a37e8  layout 0x7835cb0574f155da  size 20  align 4  dynamic
+  id: u32 @0 [4,4]
+  name: string @4 [8,4]
+  xs: vector<i16> @12 [8,4]
+struct std::monostate  schema 0xe3f5041aaaa18c06  layout 0x3ba1f9a330b68a73  size 1  align 1  flat
+struct corpus::DynNested  schema 0xf4d2426d5a5d76df  layout 0x81a9968392688e75  size 24  align 4  dynamic
+  msgs: vector<struct<corpus::DynMsg>> @0 [8,4]
+  maybe: optional<struct<corpus::Order>> @8 [8,4]
+  v: variant<i32|struct<corpus::Order>|string> @16 [8,4]
+layout      1 flat type, 32 bytes: payload 29 (90.6%), padding 3 (9.4%)
+literal 0x1884f6edbfe89b6e "msg={} note={}"
+literal 0x68dc79c312020102 "map"
+literal 0xb6ed62f53c446e40 "ids={} map={}"
+literal 0xfa579a03eefd9495 "ids"
+call 0x07f130f7f874007a  (corpus::DynBase)
+call 0x594f3763afbcef17  (corpus::DynNested, corpus::DynArr)
+call 0x756ab14e2ac9db8e  (corpus::DynMsg)
+println 0x7bc19f076918cb8d  (lit, std::vector<i32>, corpus::DynMap)
+call 0x9ed3aef1a696894d  (lit, std::vector<i32>)
+call 0xcd9f5445da365471  (lit, corpus::DynMap)
+println 0xe3567a6dde0d2d3f  (lit, corpus::DynMsg, string)
+
+frame 1  call 0x756ab14e2ac9db8e  (1 records)
+  [0] corpus::DynMsg {
+        id: 7
+        name: "ab"
+        xs: [1, -2, 3]
+      }
+frame 2  call 0x594f3763afbcef17  (2 records)
+  [0] corpus::DynNested {
+        msgs: [corpus::DynMsg{id: 7, name: "ab", xs: [1, -2, 3]}, corpus::DynMsg{id: 8, name: "", xs: []}]
+        maybe: corpus::Order {
+          id: 42
+          px: 1050000
+          qty: 100
+          side: corpus::Side::buy (1)
+          sym: "AAPL\0\0\0\0"
+        }
+        v: variant<2:string> {
+          value: "var"
+        }
+      }
+  [1] corpus::DynArr {
+        names: ["n0", "n1"]
+        tags: ["x", "yy"]
+        side: null
+        maybe_msg: variant<1:corpus::DynMsg> {
+          value: corpus::DynMsg {
+            id: 7
+            name: "ab"
+            xs: [1, -2, 3]
+          }
+        }
+      }
+frame 3  call 0x07f130f7f874007a  (1 records, full)
+  [0] corpus::DynBase {
+        <base:corpus::Order>: corpus::Order {
+          id: 42
+          px: 1050000
+          qty: 100
+          side: corpus::Side::buy (1)
+          sym: "AAPL\0\0\0\0"
+        }
+        note: "note"
+      }
+frame 4  println 0xe3567a6dde0d2d3f  (3 records)
+  print: msg=corpus::DynMsg{id: 7, name: "ab", xs: [1, -2, 3]} note=text
+frame 5  call 0xcd9f5445da365471  (2 records)
+  [0] "map"
+  [1] corpus::DynMap {
+        id: 9
+        by_name: {"a": 1, "b": 2, "c": 3}
+        ids: {10, 20, 30}
+        names: {-1: "minus one", 4: "four", 5: "five"}
+        msgs: {1: corpus::DynMsg{id: 1, name: "one", xs: [1, 1]}, 2: corpus::DynMsg{id: 2, name: "two", xs: [2]}}
+      }
+frame 6  call 0x9ed3aef1a696894d  (2 records)
+  [0] "ids"
+  [1] [3, 1, 2]
+frame 7  call 0x9ed3aef1a696894d  (2 records)
+  [0] "ids"
+  [1] []
+frame 8  call 0x9ed3aef1a696894d  (2 records, full)
+  [0] "ids"
+  [1] [3, 1, 2]
+frame 9  println 0x7bc19f076918cb8d  (3 records)
+  print: ids=[3, 1, 2] map=corpus::DynMap{id: 9, by_name: {"a": 1, "b": 2, "c": 3}, ids: {10, 20, 30}, names: {-1: "minus one", 4: "four", 5: "five"}, msgs: {1: corpus::DynMsg{id: 1, name: "one", xs: [1, 1]}, 2: corpus::DynMsg{id: 2, name: "two", xs: [2]}}}

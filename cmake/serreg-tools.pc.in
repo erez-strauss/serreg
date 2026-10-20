@@ -1,0 +1,8 @@
+prefix=${pcfiledir}/@ES_SERREG_PC_UP@
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+
+Name: serreg-tools
+Description: es::serreg_tools — srdump's command line, the Wireshark generator and the dictionary diff (es::serreg)
+Version: @PROJECT_VERSION@
+Requires: serreg = @PROJECT_VERSION@
+Libs: -L${libdir} -lserreg_tools

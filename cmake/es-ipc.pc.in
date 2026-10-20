@@ -1,0 +1,8 @@
+prefix=${pcfiledir}/@ES_SERREG_PC_UP@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+
+Name: es-ipc
+Description: es::ipc — header-only shared-memory regions and variable-size SPSC/SPMC rings (C++23; part of the serreg package)
+Version: @PROJECT_VERSION@
+Cflags: -I${includedir} -std=c++23
+Libs: -lpthread

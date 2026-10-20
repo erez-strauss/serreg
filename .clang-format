@@ -1,0 +1,25 @@
+BasedOnStyle: Microsoft
+AccessModifierOffset: -4
+PointerAlignment: Left
+ColumnLimit:     100
+SpaceAfterCStyleCast: false
+SpaceAfterTemplateKeyword: false
+DerivePointerAlignment: false
+ReflowComments: false
+# 2.1.13 (AGENTS.md §4): package headers before system headers. One block per category, sorted within it:
+# the file's own local headers ("..."), the package (<es/...>), third-party (<catch2/...>), POSIX/C (<*.h>), and
+# the C++ standard library. Every header is self-contained (ctest headers_self_contained) and starts with
+# #pragma once (scripts/check-includes.py).
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:    '^"'
+    Priority: 1
+  - Regex:    '^<es/'
+    Priority: 2
+  - Regex:    '^<catch2/'
+    Priority: 3
+  - Regex:    '^<[A-Za-z0-9_/]+\.h>'
+    Priority: 4
+  - Regex:    '^<'
+    Priority: 5
+SortIncludes: CaseSensitive

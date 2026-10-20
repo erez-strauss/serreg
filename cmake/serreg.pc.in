@@ -1,0 +1,9 @@
+prefix=${pcfiledir}/@ES_SERREG_PC_UP@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+
+Name: serreg
+Description: C++26 reflection-driven binary serialization with a load-time type registry (es::serreg)
+Version: @PROJECT_VERSION@
+Cflags: -I${includedir} -std=c++26 @ES_SERREG_REFLECTION_FLAG@@ES_SERREG_PC_CFLAGS@
+Libs: -L${libdir} -lserreg@ES_SERREG_PC_LIBS@ -lpthread
