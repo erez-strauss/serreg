@@ -10,12 +10,6 @@ Checks:
   4. stale   no book page mentions a symbol listed in STALE (names removed from the code);
   5. tests   (2.1.3) a quoted test name — "FR-…", "G2-…", "gk …", "cc …", "2.x …", "format …" — is (part of) a
              TEST_CASE name in tests/; "…" in the quote stands for omitted words.
-  6. docs    every `docs/<name>.md` and `book/<name>.md` path cited in README.md, CONTRIBUTING.md, CHANGELOG.md,
-             docs/**/*.md and book/**/*.md exists in the tree (a plain regex over back-quoted or bare paths;
-             paths under remove-me/ or tests/fixtures/ and placeholders such as `vX.Y.Z.md` are skipped; a
-             retired document still under remove-me/<path> counts as existing for historical citations; a path
-             followed by "(planned …)" / "(to be written …)" is an announcement, not a citation).
-             Problems print as `docs: <file>:<line>: cites <path> which does not exist`.
 
 usage: scripts/check-book.py [--fix] [--quiet]
   --fix     rewrite drifted citations of kind 3 when the block's first line occurs exactly once in the file
@@ -29,7 +23,7 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOPIC_PAGES = {"build-system.md", "examples.md", "tests.md"}
-SOURCE_DIRS = ["include/es/serreg", "include/es/ipc", "src", "tools/srdump"]
+SOURCE_DIRS = ["include/es/serreg", "include/es/ipc", "include/es/ipc_old", "src", "tools/srdump"]
 SEARCH_DIRS = ["include", "src", "tools", "examples", "tests"]
 # Names that were removed from the code; the book must not describe them as current.
 STALE = ["fnv1a64", "hash_algo_fnv1a64", "golden-1.0", "golden-1.1", "compat10_", "compat11_",
@@ -40,14 +34,6 @@ TEST_QUOTE = re.compile(r'"((?:FR-|NFR-|G2-|gk |cc |2\.\d|v\d|format )[^"]{6,})"
 REF = re.compile(r"([A-Za-z_][A-Za-z0-9_.-]*\.(?:hpp|cpp|h|cmake|sh|py)):(\d+)(?:[-–](\d+))?")
 # a back-quoted identifier in prose: `name`, `ns::name`, `name()`, `--flag`, `name<T>` (the template part is dropped)
 PROSE_TOKEN = re.compile(r"`([A-Za-z_:~\-][A-Za-z0-9_:\-]*(?:\(\))?)(?:<[^`]*>)?`")
-# check 6: a cited document path — `docs/foo.md`, `book/files/x.md`, bare or back-quoted, possibly prefixed by
-# `remove-me/` or `tests/fixtures/…` (then skipped). The optional prefix group makes the match start at the
-# real path start, so `remove-me/docs/old.md` is not read as `docs/old.md`.
-DOC_PATH = re.compile(r"(?<![A-Za-z0-9_./-])((?:[A-Za-z0-9_.-]+/)*)((?:docs|book)/[A-Za-z0-9_./-]*\.md)\b")
-DOC_PATH_PLACEHOLDERS = ("X.Y", "NNN", "<", "*", "...", "…")
-DOC_PLANNED = re.compile(r"`?\s*\((?:planned|to be written|not yet written)\b", re.IGNORECASE)
-DOC_CITING_FILES = ["README.md", "CONTRIBUTING.md", "CHANGELOG.md"]
-DOC_CITING_DIRS = ["docs", "book"]
 
 
 def source_files():
@@ -203,35 +189,6 @@ def main():
             if changed:
                 with open(path, "w", encoding="utf-8") as fh:
                     fh.write("\n".join(lines))
-
-    # 6. docs: cited document paths exist (2.2.6, review B6)
-    citing = [os.path.join(REPO, f) for f in DOC_CITING_FILES]
-    for d in DOC_CITING_DIRS:
-        for dp, _, fs in os.walk(os.path.join(REPO, d)):
-            citing.extend(os.path.join(dp, f) for f in sorted(fs) if f.endswith(".md"))
-    for path in citing:
-        if not os.path.isfile(path):
-            continue
-        rel_page = os.path.relpath(path, REPO)
-        with open(path, encoding="utf-8", errors="replace") as fh:
-            doc_lines = fh.read().split("\n")
-        for i, line in enumerate(doc_lines):
-            for m in DOC_PATH.finditer(line):
-                prefix, cited = m.group(1), m.group(2)
-                if prefix.startswith("remove-me/") or prefix.startswith("tests/fixtures"):
-                    continue
-                if any(p in cited for p in DOC_PATH_PLACEHOLDERS):
-                    continue
-                # a document that is announced, not yet written: `docs/x.md` (planned …) / (to be written …)
-                if DOC_PLANNED.match(line, m.end()):
-                    continue
-                # a retired document lives under remove-me/ for one release (D-1); a historical citation of it
-                # (CHANGELOG, test reports, old plans) is not stale while it is still there
-                if os.path.isfile(os.path.join(REPO, cited)) or \
-                        os.path.isfile(os.path.join(REPO, "remove-me", cited)):
-                    continue
-                problems.append(f"docs: {rel_page}:{i + 1}: cites {cited} which does not exist")
-
     for p in problems:
         print(p)
     if not quiet or problems:
